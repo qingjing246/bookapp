@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    span{
+        display: none;
+    }
+    .addition{
+        display: none;
+    }
+</style>
+<body>
+    <p id="name"></p>
+    <img src="" alt="" id="img"/>
+    <div id="jianjie"></div>
+<div id="main"></div>
+</body>
+<script>
+    window.onload = function () {
+        var xml;
+        var name = document.getElementById('name');
+        var img = document.getElementById('img');
+        var jianjie = document.getElementById('jianjie');
+        var main = document.getElementById('main');
+
+
+        if (window.XMLHttpRequest) {
+            xml = new XMLHttpRequest();
+        } else {
+            xml = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                var info = JSON.parse(xml.responseText);
+                name.innerText = info.name;
+                img.src = info.imgUrl;
+                jianjie.innerHTML = info.introduce;
+                main.innerHTML = info.zcontainer[0].main;
+                console.log(info);
+
+            }
+        };
+
+        xml.open("GET", '../data/bookdata.json', true);
+        xml.send();
+
+
+    }
+</script>
+</html>
