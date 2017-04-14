@@ -1,53 +1,209 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en" ng-app="app">
+<head>
     <meta charset="UTF-8">
-    <title></title>
-</head>
-<style>
-    span{
-        display: none;
-    }
-    .addition{
-        display: none;
-    }
-</style>
-<body>
-    <p id="name"></p>
-    <img src="" alt="" id="img"/>
-    <div id="jianjie"></div>
-<div id="main"></div>
-</body>
-<script>
-    window.onload = function () {
-        var xml;
-        var name = document.getElementById('name');
-        var img = document.getElementById('img');
-        var jianjie = document.getElementById('jianjie');
-        var main = document.getElementById('main');
-
-
-        if (window.XMLHttpRequest) {
-            xml = new XMLHttpRequest();
-        } else {
-            xml = new ActiveXObject("Microsoft.XMLHTTP")
+    <meta name="viewport" content="width=device-width,initial-scale=1,use-scalable=no,minimal-ul">
+    <meta name="format-detection" content="telephone=nio">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="font-icon/iconfont.css"/>
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style:none;
         }
-        xml.onreadystatechange = function () {
-            if (xml.readyState == 4 && xml.status == 200) {
-                var info = JSON.parse(xml.responseText);
-                name.innerText = info.name;
-                img.src = info.imgUrl;
-                jianjie.innerHTML = info.introduce;
-                main.innerHTML = info.zcontainer[0].main;
-                console.log(info);
+        .clearfix:after,.clearfix:before{
+            clear: both;
+            content: "";
+        }
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body,h4,li,ul,p{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: left;
+            width:100%;
+            background: #e9dfc7;
+        }
+        .read-content{
+            overflow:hidden;
+            font-size:14px;
+            color:#555;
+            line-height:31px;
+            padding: 15px;
+        }
+        .read-content span{
+            display: none;
+        }
+        .read-content hr{
+            border-color:#736357;
+        }
+        .read-content h4{
+            font-size:20px;
+            line-height: 20px;
+            color:#736357;
+            letter-spacing: 2px;
+        }
+        .read-content p{
+            text-indent:2em;
+            margin:0.5em 0;
+            line-height:26px;
+            letter-spacing: 1px;
+        }
+        .tab{
+            height:34px;
+            margin:10px auto;
+            line-height:34px;
+            border-radius: 8px;
+            border:1px solid #858382;
+            font-size:12px;
+            background:#000;
+            opacity:0.9;
+        }
+        .tab li{
+            float:left;
+            width:50%;
+            color: #fff;
+            text-align:center;
+        }
+        .tab li:nth-child(2){
+            border-right:none;
+        }
+        .button-bar{
+            width:70%;
+            max-width: 800px;
+            padding: 5px;
+            margin: 0 auto;
+        }
+        .top-nav{
+            position:fixed;
+            top:0;
+            height:50px;
+            width:100%;
+            z-index: 9999;
+            background:#000;
+            color:#fff;
+        }
+        .icon-back{
+            display: inline-block;
+            margin-top: 16px;
+            margin-left: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            border:1px solid #afafaf;
+            text-align: center;
+            line-height: 20px;
+        }
+        .icon-back i{
+            font-size: 14px;
+        }
+        .nav-title{
+            font-size: 16px;
+            display:inline-block ;
+            margin-top: 16px;
+        }
+        .nav-pannel-bg{
+            position: fixed;
+            bottom:70px;
+            height: 135px;
+            width: 100%;
+            background:#000;
+            opacity:0.9;
+            z-index: 9999;
+        }
+        .nav-pannel{
+            position: fixed;
 
-            }
-        };
+            bottom:70px;
+            height:135px;
+            width:100%;
+            background:none;
+            color:#fff;
+            z-index: 10000;
+        }
+        .child-mod{
+            padding:5px 10px;
+            margin:15px;
+        }
+        .child-mod span{
+            display: inline-block;
+            padding-right:20px;
+            padding-left: 10px;
+        }
+        .font-size-button{
+            background: none;
+            border:1px solid #bcbcbc;
+            color: #fff;
+            border-radius: 16px;
+            padding: 5px 40px;
+        }
+        .child-mod:nth-child(2){
+            margin-right: 10px;
+        }
+        .bg-container{
+            width:30px;
+            height:30px;
+            border-radius: 15px;
+            background:#fff;
+            display: inline-block;
+        }
+        .bg-container-current{
+            width:32px;
+            height:32px;
+            border-radius: 16px;
+            border:1px solid #ff7800;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div id="root" class="container">
+    <div id="top-nav" class="top-nav">
+        <div class="icon-back">
+            <i class="iconfont icon-yuyin"></i>
+        </div>
+        <div class="nav-title">返回书架</div>
+    </div>
+    <div id="fiction_title">
 
-        xml.open("GET", '../data/bookdata.json', true);
-        xml.send();
+    </div>
+    <div id="fiction_container" class="read-content">
+        <h4>节过后没两天，李府上下就开</h4><hr>
+        <p>
+            开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说，这京城内外的显贵高族之家，也足有十来年没办过七十寿这样的大喜事了，宁老夫人的七十寿，不光李家当头等荣耀大事来办，京城内外，但凡和李家能沾上一星半点交情的，都郑重备了寿礼，打发要紧的人送到李府，在堂前拣几粒福豆，讨上几串福寿结回去，十月十九正日子那天的请柬，李玉靖和长子李云志商量来掂量去，捻断了不知道多少根胡须才定下来，照理说都请上最好，可李府就那么大点地方，要紧的人家一家不能落下，可又不能露出势利相来，这一番思量，真是费尽了心机。<span class=\"watermark\">^=$!$本书首|发纵^横-中文|网&amp;~*&amp;@</span></p><p>十月十六日起，李府就依着规矩，在府门口和李府后巷口派送寿桃，若有年过五十的老人，再加送一瓶米酒，十个大钱，一直派到十八日晚，三天里派出的寿桃无数。十九日一早，内侍就捧着皇上亲笔写的‘寿’字颁赏下来，紧接着，皇后遣内侍赏了柄金嵌玉如意，李玉靖兴奋的满脸红光，亲自踩着凳子将‘寿’字悬挂到正堂正中，又恭恭敬敬的将那柄金嵌玉如意供在了寿字下面的长几上。<span class=\"watermark\">^=$!$本书首|发纵^横-中文|网&amp;~*&amp;@</span>
+        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
+        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
+    </p>
+    </div>
+    <div class=button-bar>
+        <ul class="tab">
+            <li id="prev_button">上一章</li>
+            <li id="next_button">下一章</li>
+        </ul>
+    </div>
+    <div class="nav-pannel-bg"></div>
+    <div class="nav-pannel" id="font-container">
+        <div class="child-mod font-size">
+            <span>字号</span>
+            <button id="large-font" class="font-size-button">大</button>
+            <button id="small-font" class="font-size-button">小</button>
+        </div>
+        <div class="child-mod background-color">
+            <span>背景</span>
+            <div class="bg-container">
+                <div class="bg-container-current"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
 
-
-    }
 </script>
+</body>
+
 </html>
