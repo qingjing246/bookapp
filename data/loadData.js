@@ -1,16 +1,15 @@
 var page = require('webpage').create();
 var execFile = require("child_process").execFile;
-var fs = require('fs');
-var mypath = 'bookdata.json';
+
 var url = 'http://huayu.baidu.com/book/219667.html';
 var headdata = '';
 var bookInfo = '';
 var pageNumber = 0;
 var n = 0;
-var t =new Date();
+var tt =new Date();
 var child;
 
-phantom.outputEncoding = "gb2312";
+phantom.outputEncoding = "utf-8";
 
 page.open(url, function (status) {
     console.log(status);
@@ -29,15 +28,15 @@ page.open(url, function (status) {
             'introduce': introduce,
             'imgUrl': imgUrl,
             'allPage': allPage,
-            'pageOne': pageOne,
-            'zcontainer': []
+            'pageOne': pageOne
+            // 'zcontainer': []
         };
 
 
         return bookInfo;
     });
     console.log("---------抬头信息" + JSON.stringify(headdata, undefined, 4));
-
+    //loadtitle(headdata);
     pageN(headdata.allPage);
     console.log("--------所有章节" + headdata.allPage)
 
@@ -48,7 +47,7 @@ function pageN(url) {
     page.open(url, function (status) {
         console.log("-------所有章节打开成功" + status);
         pageNumber = page.evaluate(function () {
-            var pageN = /*document.getElementsByClassName('chapname').length - 1*/ 1;
+            var pageN = document.getElementsByClassName('chapname').length -1;
             return pageN;
         });
         console.log('--------一共有' + pageNumber + '章--------');
@@ -79,14 +78,14 @@ function pageInfo(url) {
             return title;
         });
 
-
-        headdata.zcontainer[n-1] = {
-            'title': t,
-            'main':b
-        };
-
+        var container = [t,b,url];
+        // var container = {
+        //      'title': t,
+        //      'main':b
+        //  };
+        //console.log(JSON.stringify(container));
         console.log("第" + n + "次");
-
+        loadtitle(container);
         var nextPage = page.evaluate(function () {
             var length = document.getElementsByClassName('key')[0].getElementsByTagName('a').length;
             var c = document.getElementsByClassName('key')[0].getElementsByTagName('a')[length - 1].href;
@@ -102,12 +101,11 @@ function pageInfo(url) {
             console.log(nextPage);
             pageInfo(nextPage);
         } else {
-            loadtitle(headdata);
-            // fs.write(mypath,JSON.stringify(headdata,undefined,4));
-            fs.write(mypath, JSON.stringify(headdata, undefined, 4));
+            //loadtitle(headdata);
+
             /*console.log(JSON.stringify(headdata, undefined, 4));*/
-            t = new Date() - t  ;
-            console.log(t);
+            tt = new Date - tt;
+            console.log(tt);
             /*phantom.exit();*/
             setTimeout(function () {
                 phantom.exit(0)
