@@ -1,4 +1,5 @@
 var page = require('webpage').create();
+var execFile = require("child_process").execFile;
 var fs = require('fs');
 var mypath = 'bookdata.json';
 var url = 'http://huayu.baidu.com/book/219667.html';
@@ -7,6 +8,8 @@ var bookInfo = '';
 var pageNumber = 0;
 var n = 0;
 var t =new Date();
+var child;
+
 phantom.outputEncoding = "gb2312";
 
 page.open(url, function (status) {
@@ -45,7 +48,7 @@ function pageN(url) {
     page.open(url, function (status) {
         console.log("-------所有章节打开成功" + status);
         pageNumber = page.evaluate(function () {
-            var pageN = document.getElementsByClassName('chapname').length - 1;
+            var pageN = /*document.getElementsByClassName('chapname').length - 1*/ 1;
             return pageN;
         });
         console.log('--------一共有' + pageNumber + '章--------');
@@ -90,21 +93,33 @@ function pageInfo(url) {
             return c;
         });
 
+
+
+
         if (n <= pageNumber-1 ) {
             //console.log(JSON.stringify(headdata,undefined,4));
             //console.log(b);
             console.log(nextPage);
             pageInfo(nextPage);
         } else {
-
+            loadtitle(headdata);
             // fs.write(mypath,JSON.stringify(headdata,undefined,4));
             fs.write(mypath, JSON.stringify(headdata, undefined, 4));
-            console.log(JSON.stringify(headdata, undefined, 4));
+            /*console.log(JSON.stringify(headdata, undefined, 4));*/
             t = new Date() - t  ;
             console.log(t);
-            phantom.exit();
+            /*phantom.exit();*/
+            setTimeout(function () {
+                phantom.exit(0)
+            }, 2000);
         }
     })
+}
 
+function loadtitle(info){
+    child = execFile('node', ['main.js', JSON.stringify(info)], null,
+        function (err, stdout, stderr) {
+            console.log(stdout);
 
+        });
 }
