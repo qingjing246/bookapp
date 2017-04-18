@@ -1,24 +1,34 @@
 
-//var a = JSON.parse(process.argv[2]);
-
-
 var Mongoclient = require('mongodb').MongoClient;
-var DB_url = 'mongodb://localhost:27017/qingjing';
+var DB_url = 'mongodb://localhost:27017/book';
 
 
 var a = JSON.parse(process.argv[2]);
 //console.log(a);
 var insertData = function(db,callback){
-    //新建表格
-    //db.createCollection('tb1');
-    //插入列表
-    var collection = db.collection('tb1');
+    /*var DB = db.collection(a[2]);
     //插入数据
-    var data =[{"name":a[0],"main":a[1],"url":a[2]}];
-    collection.insert(data,function(err,result){
 
-        callback(result);
-    })
+    });*/
+    var collectioninfo = db.collection("bookinfo");
+    var collectioncontent = db.collection("bookcontent");
+    var createDate = new Date();
+
+    if(a.length >6 ){
+
+        //插入头部信息
+        var headData = [{"id":a[2],"name":a[3],"author":a[4],"info":a[5],"imgUrl":a[6],"upDataDate":a[7],"createDate":createDate}];
+        collectioninfo.insert(headData,function(err,result){
+            callback(result);
+        })
+    }else{
+        //插入章节信息
+        var textData =[{"id":a[0],"bookid":a[1],"title":a[2],"content":a[3],"url":a[4]}];
+        collectioncontent.insert(textData,function(err,result){
+            callback(result);
+        })
+    }
+
 };
 
 Mongoclient.connect(DB_url,function(err,db){

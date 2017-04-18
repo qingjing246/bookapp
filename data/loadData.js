@@ -1,62 +1,60 @@
 var page = require('webpage').create();
 var execFile = require("child_process").execFile;
 
-var url = 'http://huayu.baidu.com/book/219667.html';
+var allUrl = ['http://huayu.baidu.com/book/435979.html','http://huayu.baidu.com/book/650649.html'];
 var headdata = '';
 var bookInfo = '';
 var pageNumber = 0;
 var n = 0;
-var tt =new Date();
+var m = 0;
+var tt = new Date();
 var child;
 
-phantom.outputEncoding = "utf-8";
+phantom.outputEncoding = "gb2312";
+console.log(allUrl[m]);
+headr(allUrl[m]);
 
-page.open(url, function (status) {
-    console.log(status);
+//打开首页
+function headr(url) {
+    page.open(url, function (status) {
+        console.log(status);
+        headdata = page.evaluate(function () {
+            var id = document.body.getAttribute('bookid');
+            var head = document.getElementsByClassName('lebg')[0];
+            var title = head.getElementsByTagName('a')[0].innerText;
+            var author = head.getElementsByTagName('a')[1].innerText;
+            var introduce = document.getElementsByClassName('jj')[0].innerHTML;
+            var imgUrl = document.getElementsByClassName('img')[0].getElementsByTagName('img')[0].src;
+            var allPage = document.getElementsByClassName('more')[0].getElementsByTagName('a')[0].href;
+            var pageOne = document.getElementsByClassName('chapname')[1].firstChild.href;
+            var updateDate = new Date();
 
-    headdata = page.evaluate(function () {
-        var head = document.getElementsByClassName('lebg')[0];
-        var title = head.getElementsByTagName('a')[0].innerText;
-        var author = head.getElementsByTagName('a')[1].innerText;
-        var introduce = document.getElementsByClassName('jj')[0].innerHTML;
-        var imgUrl = document.getElementsByClassName('img')[0].getElementsByTagName('img')[0].src;
-        var allPage = document.getElementsByClassName('more')[0].getElementsByTagName('a')[0].href;
-        var pageOne = document.getElementsByClassName('chapname')[1].firstChild.href;
-        bookInfo = {
-            'name': title,
-            'author': author,
-            'introduce': introduce,
-            'imgUrl': imgUrl,
-            'allPage': allPage,
-            'pageOne': pageOne
-            // 'zcontainer': []
-        };
+            bookInfo = [allPage, pageOne, id, title, author, introduce, imgUrl, updateDate];
+            return bookInfo;
+        });
+        console.log("---------抬头信息" + JSON.stringify(headdata, undefined, 4));
 
+        insert(headdata);
+        pageN(headdata[0]);
+        console.log("--------所有章节" + headdata[0])
 
-        return bookInfo;
     });
-    console.log("---------抬头信息" + JSON.stringify(headdata, undefined, 4));
-    //loadtitle(headdata);
-    pageN(headdata.allPage);
-    console.log("--------所有章节" + headdata.allPage)
+}
 
-});
-
+//打开所有章节
 function pageN(url) {
-    console.log("--------所有章节" + url);
     page.open(url, function (status) {
         console.log("-------所有章节打开成功" + status);
         pageNumber = page.evaluate(function () {
-            var pageN = document.getElementsByClassName('chapname').length -1;
+            //var pageN = document.getElementsByClassName('chapname').length - 1;
+             var pageN = 5;
             return pageN;
         });
         console.log('--------一共有' + pageNumber + '章--------');
-
-
-        pageInfo(headdata.pageOne);
-
+        pageInfo(headdata[1]);
     })
 }
+
 
 function pageInfo(url) {
     console.log('----------下一章节页' + url);
@@ -72,20 +70,16 @@ function pageInfo(url) {
         });
 
 
-        var t =page.evaluate(function () {
+        var t = page.evaluate(function () {
 
-            var  title = document.getElementsByClassName('tc')[1].getElementsByTagName('h2')[0].innerText;
+            var title = document.getElementsByClassName('tc')[1].getElementsByTagName('h2')[0].innerText;
             return title;
         });
 
-        var container = [t,b,url];
-        // var container = {
-        //      'title': t,
-        //      'main':b
-        //  };
-        //console.log(JSON.stringify(container));
-        console.log("第" + n + "次");
-        loadtitle(container);
+        var container = [n, headdata[2], t, b, url];
+
+        console.log("---------第" + n + "次------------");
+        insert(container);
         var nextPage = page.evaluate(function () {
             var length = document.getElementsByClassName('key')[0].getElementsByTagName('a').length;
             var c = document.getElementsByClassName('key')[0].getElementsByTagName('a')[length - 1].href;
@@ -93,9 +87,7 @@ function pageInfo(url) {
         });
 
 
-
-
-        if (n <= pageNumber-1 ) {
+        if (n <= pageNumber - 1) {
             //console.log(JSON.stringify(headdata,undefined,4));
             //console.log(b);
             console.log(nextPage);
@@ -105,19 +97,30 @@ function pageInfo(url) {
 
             /*console.log(JSON.stringify(headdata, undefined, 4));*/
             tt = new Date - tt;
-            console.log(tt);
+            console.log("-----------总共加载时间" + tt * 0.001 + "秒-------------");
             /*phantom.exit();*/
+            if( m >= url.length){
+                phantom.exit(0)
+            }else{
+                console.log("--------------开始下一本-------------");
+                m ++;
+                console.log(allUrl[m]);
+                headr(allUrl[m]);
+            }
+            /*m ++;
+            headr(url[m]);
             setTimeout(function () {
                 phantom.exit(0)
-            }, 2000);
+            }, 2000);*/
         }
     })
 }
 
-function loadtitle(info){
+
+//插入数据库
+function insert(info) {
     child = execFile('node', ['main.js', JSON.stringify(info)], null,
         function (err, stdout, stderr) {
-            console.log(stdout);
-
+            //console.log(stdout);
         });
 }
