@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "phantomjs": "^2.1.7+deprecated"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
   }
 }

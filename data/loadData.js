@@ -10,12 +10,17 @@ var m = 0;
 var tt = new Date();
 var child;
 
-phantom.outputEncoding = "gb2312";
+phantom.outputEncoding = "utf-8";
 console.log(allUrl[m]);
 headr(allUrl[m]);
 
 //打开首页
 function headr(url) {
+    pageNumber = 0;
+    tt = new Date();
+    bookInfo = '';
+    headdata = '';
+    n = 0;
     page.open(url, function (status) {
         console.log(status);
         headdata = page.evaluate(function () {
@@ -47,7 +52,7 @@ function pageN(url) {
         console.log("-------所有章节打开成功" + status);
         pageNumber = page.evaluate(function () {
             //var pageN = document.getElementsByClassName('chapname').length - 1;
-             var pageN = 5;
+            var pageN = 10;
             return pageN;
         });
         console.log('--------一共有' + pageNumber + '章--------');
@@ -80,6 +85,7 @@ function pageInfo(url) {
 
         console.log("---------第" + n + "次------------");
         insert(container);
+
         var nextPage = page.evaluate(function () {
             var length = document.getElementsByClassName('key')[0].getElementsByTagName('a').length;
             var c = document.getElementsByClassName('key')[0].getElementsByTagName('a')[length - 1].href;
@@ -88,10 +94,10 @@ function pageInfo(url) {
 
 
         if (n <= pageNumber - 1) {
-            //console.log(JSON.stringify(headdata,undefined,4));
-            //console.log(b);
+
             console.log(nextPage);
             pageInfo(nextPage);
+
         } else {
             //loadtitle(headdata);
 
@@ -99,7 +105,8 @@ function pageInfo(url) {
             tt = new Date - tt;
             console.log("-----------总共加载时间" + tt * 0.001 + "秒-------------");
             /*phantom.exit();*/
-            if( m >= url.length){
+            console.log(m);
+            if( m == allUrl.length -1){
                 phantom.exit(0)
             }else{
                 console.log("--------------开始下一本-------------");
@@ -107,11 +114,6 @@ function pageInfo(url) {
                 console.log(allUrl[m]);
                 headr(allUrl[m]);
             }
-            /*m ++;
-            headr(url[m]);
-            setTimeout(function () {
-                phantom.exit(0)
-            }, 2000);*/
         }
     })
 }

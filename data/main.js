@@ -17,13 +17,13 @@ var insertData = function(db,callback){
     if(a.length >6 ){
 
         //插入头部信息
-        var headData = [{"id":a[2],"name":a[3],"author":a[4],"info":a[5],"imgUrl":a[6],"upDataDate":a[7],"createDate":createDate}];
+        var headData = [{id:a[2],name:a[3],author:a[4],info:a[5],imgUrl:a[6],upDataDate:a[7],createDate:createDate}];
         collectioninfo.insert(headData,function(err,result){
             callback(result);
         })
     }else{
         //插入章节信息
-        var textData =[{"id":a[0],"bookid":a[1],"title":a[2],"content":a[3],"url":a[4]}];
+        var textData =[{id:a[0],bookid:a[1],title:a[2],content:a[3],url:a[4]}];
         collectioncontent.insert(textData,function(err,result){
             callback(result);
         })
