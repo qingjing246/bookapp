@@ -3,6 +3,8 @@
     "phantomjs": "^2.1.7+deprecated"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "express-generator": "^4.15.0",
+    "mongoose": "^4.9.5"
   }
 }
