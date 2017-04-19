@@ -5,14 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1></h1>
-    <p>Welcome to </p>
-    <img src='' alt=''/>
-  <ul>
+  <ul class="booklist">
     <% for(i=0;i<title.length;i++) {%>
-    <li><img src="<%= title[i]._doc.imgUrl %>"></li>
+    <li>
+      <a href="/bookinfo?id=<%= title[i]._doc.id %>" id-data="<%= title[i]._doc.id %>">
+      <img class="img" src="<%= title[i]._doc.imgUrl %>">
+      <span><%= title[i]._doc.name %></span>
+      </a>
+    </li>
     <% } %>
   </ul>
-
+    <script src="/js/base.js"></script>
   </body>
 </html>

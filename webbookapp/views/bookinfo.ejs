@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+<ul>
+    <% for( i = 0;i < info.length;i++ ) {%>
+    <li><%= info[i]._doc.title %></li>
+    <% } %>
+</ul>
+
+</body>
+</html>

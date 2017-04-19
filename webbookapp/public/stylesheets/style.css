@@ -5,4 +5,24 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+}
+.booklist{
+
+}
+.booklist li{
+  list-style: none;
+  display: inline-block;
+  padding: 5px;
+  text-align: center;
+}
+.booklist li span{
+  display: block;
+  font-size: 16px;
+  color:red;
+}
+#box{
+  width: 100px;
+  height: 100px;
+  background: red;
 }

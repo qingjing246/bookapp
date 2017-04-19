@@ -7,8 +7,13 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var bookinfo = require('./routes/bookinfo');
+var read = require('./routes/read');
 var app = express();
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/bookinfo', bookinfo);
+app.use('/read', read);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,6 +39,9 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -42,5 +53,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

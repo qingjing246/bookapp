@@ -1,7 +1,8 @@
 var page = require('webpage').create();
 var execFile = require("child_process").execFile;
 
-var allUrl = ['http://huayu.baidu.com/book/435979.html','http://huayu.baidu.com/book/650649.html'];
+var allUrl = ['http://huayu.baidu.com/book/435979.html','http://huayu.baidu.com/book/650649.html','http://huayu.baidu.com/book/650649.html','http://huayu.baidu.com/book/654833.html',
+'http://huayu.baidu.com/book/636453.html','http://huayu.baidu.com/book/641829.html','http://huayu.baidu.com/book/650786.html','http://huayu.baidu.com/book/644045.html'];
 var headdata = '';
 var bookInfo = '';
 var pageNumber = 0;
@@ -51,8 +52,8 @@ function pageN(url) {
     page.open(url, function (status) {
         console.log("-------所有章节打开成功" + status);
         pageNumber = page.evaluate(function () {
-            //var pageN = document.getElementsByClassName('chapname').length - 1;
-            var pageN = 10;
+            var pageN = document.getElementsByClassName('chapname').length - 1;
+            //var pageN = 10;
             return pageN;
         });
         console.log('--------一共有' + pageNumber + '章--------');

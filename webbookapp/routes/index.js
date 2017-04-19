@@ -1,4 +1,4 @@
-var express = require('express');
+/*var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
@@ -16,20 +16,50 @@ var title;
 var img;
 var TestSchema = new mongoose.Schema();
 var TestModel = db.model("bookinfo",TestSchema,"bookinfo");
+var bookcontent = db.model("bookcontent",TestSchema,"bookcontent");
 
 TestModel.find({},{},function (err,all){
-  /*for(var i in all){
-    console.log(all[i]._doc.id);
-  }*/
   title = all;
-  console.log(all.id);
-
 });
 
 
-/* GET home page. */
+/!* GET home page. *!/
 router.get('/', function(req, res, next) {
+  console.log(title);
   res.render('index', { title: title});
+});
+
+router.get('/bookinfo', function(req, res){
+  var bookid = req.query.id;
+
+
+  bookcontent.find({"bookid":bookid},{},function (err,all){
+
+    res.render('bookinfo',{
+      info:all
+    });
+
+  });
+
+
+
+
+});*/
+
+var express = require('express');
+var router = express.Router();
+var db = require('./mongoose.js');
+
+
+
+router.get('/', function(req, res, next) {
+
+  db.bookinfo.find({},function (err,all){
+
+    res.render('index', { title: all});
+
+  });
+
 });
 
 module.exports = router;
