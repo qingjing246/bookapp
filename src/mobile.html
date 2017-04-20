@@ -163,7 +163,7 @@
     }
 
     .home-book-info h3 {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 500;
         line-height: 30px;
         color: #333;
@@ -172,7 +172,7 @@
     .home-book-info .doc {
         font-size: 15px;
         color: #6d6d6d;
-        line-height: 22px;
+        line-height: 20px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -238,13 +238,15 @@
             <i>编辑推荐</i>
         </div>
         <div class="card-con">
-            <% for(i=0;i<title.length;i++) {%>
-            <div class="home-book-item" data-bookid="<%= title[i]._doc.id %>" data-url="/bookinfo?id=<%= title[i]._doc.id %>">
+
+            <div class="home-book-item">
                 <div class="home-book-img">
-                    <img src="<%= title[i]._doc.imgUrl %>" alt=""/>
+                    <img src="http://static.zongheng.com/upload/s_image/cover/c7/71/c77160e5b5b313aa4d6290a8bef9096d.jpeg"
+                         alt=""/>
                 </div>
                 <div class="home-book-info">
-                    <h3><%= title[i]._doc.name %></h3>
+                    <h3>蠢蠢欲动</h3>
+
                     <div class="doc">
                         你是总裁怎么了，你盛世美颜怎么了！姐姐我是犯花痴，但是就不甩你！
                         苏墨想查自己的身世，无意惹上高冷君大少爷，少爷原想报复找回面子。谁知一不小心就看上了这个死女人，人生第一次追妻，简直粗鲁得不要不要的……
@@ -258,13 +260,69 @@
                         某少爷直接躺下……
                     </div>
                     <div class="other-info fle">
-                        <i class="item-author flex-fluid"><%= title[i]._doc.author %></i>
+                        <i class="item-author flex-fluid">师徒</i>
                         <i class="item-label">宦官使徒</i>
                         <i class="item-state">连载</i>
                     </div>
                 </div>
             </div>
-            <% } %>
+
+            <div class="home-book-item">
+                <div class="home-book-img">
+                    <img src="http://static.zongheng.com/upload/s_image/cover/c7/71/c77160e5b5b313aa4d6290a8bef9096d.jpeg"
+                         alt=""/>
+                </div>
+                <div class="home-book-info">
+                    <h3>蠢蠢欲动</h3>
+
+                    <div class="doc">
+                        你是总裁怎么了，你盛世美颜怎么了！姐姐我是犯花痴，但是就不甩你！
+                        苏墨想查自己的身世，无意惹上高冷君大少爷，少爷原想报复找回面子。谁知一不小心就看上了这个死女人，人生第一次追妻，简直粗鲁得不要不要的……
+                        少爷，一次见面捏脸，两次见面接吻，那第三次是不是该上哪去加深了解啊！
+                        苏墨本想教育一下君以烈，大少爷追女孩子不是这样粗暴的，光是霸道会被嫌弃的！君大少爷却自己忽然顿悟，玩起了腹黑！
+                        没事，你睡吧，我会陪着你，免得你想不开，不用谢我。
+                        某少爷特别大度
+                        少爷，你哪只眼睛看见我想不开？！
+                        某女抓狂。
+                        知道你情绪不好，放心，我不介意。
+                        某少爷直接躺下……
+                    </div>
+                    <div class="other-info fle">
+                        <i class="item-author flex-fluid">师徒</i>
+                        <i class="item-label">宦官使徒</i>
+                        <i class="item-state">连载</i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-book-item">
+                <div class="home-book-img">
+                    <img src="http://static.zongheng.com/upload/s_image/cover/c7/71/c77160e5b5b313aa4d6290a8bef9096d.jpeg"
+                         alt=""/>
+                </div>
+                <div class="home-book-info">
+                    <h3>蠢蠢欲动</h3>
+
+                    <div class="doc">
+                        你是总裁怎么了，你盛世美颜怎么了！姐姐我是犯花痴，但是就不甩你！
+                        苏墨想查自己的身世，无意惹上高冷君大少爷，少爷原想报复找回面子。谁知一不小心就看上了这个死女人，人生第一次追妻，简直粗鲁得不要不要的……
+                        少爷，一次见面捏脸，两次见面接吻，那第三次是不是该上哪去加深了解啊！
+                        苏墨本想教育一下君以烈，大少爷追女孩子不是这样粗暴的，光是霸道会被嫌弃的！君大少爷却自己忽然顿悟，玩起了腹黑！
+                        没事，你睡吧，我会陪着你，免得你想不开，不用谢我。
+                        某少爷特别大度
+                        少爷，你哪只眼睛看见我想不开？！
+                        某女抓狂。
+                        知道你情绪不好，放心，我不介意。
+                        某少爷直接躺下……
+                    </div>
+                    <div class="other-info fle">
+                        <i class="item-author flex-fluid">师徒</i>
+                        <i class="item-label">宦官使徒</i>
+                        <i class="item-state">连载</i>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="card boy">
@@ -342,8 +400,6 @@
 
         navStyle();
         slide();
-        openurl('home-book-item');
-
 
         function slide() {
             var n = 0;
@@ -358,18 +414,6 @@
                 }
                 slidebox[n].style.display = 'inline-block';
             }, 3000)
-        }
-
-        function openurl(element){
-            var a = document.getElementsByClassName(element);
-
-            for (var i = 0; i < a.length; i++) {
-                a[i].onclick = function (){
-                    this.style.background = '#e6e6e6';
-                    window.location.href = this.getAttribute('data-url');
-                }
-            }
-
         }
 
         function navStyle() {
