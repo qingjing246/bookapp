@@ -4,11 +4,17 @@
  */
 var express = require('express');
 var router = express.Router();
-
+var db = require('./mongoose');
 /* GET users listing. */
-router.get('/', function (req, res, next) {
 
-        res.render('read', { info: "阅读器" })
+router.get('/', function (req, res, next) {
+        var bookid = req.query.bookid;
+        var a = Number(req.query.id);
+        db.bookcontent.find({'bookid':bookid ,'id' : a },function(err,all){
+            res.render('read', { info: all })
+
+        });
+
 
 
 });

@@ -1,16 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>Title</title>
 </head>
+<style>
+    body,h3{
+        margin:0;
+        padding:0;
+    }
+    i,span,em{
+        font-style:normal;
+    }
+    h3{
+        font-weight:600;
+
+    }
+    a{
+        text-decoration: none;
+    }
+    .flex {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .flex-fluid {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .head{
+        background:#333;
+        color:#fff;
+    }
+    .head a:nth-child(1){
+        display: inline-block;
+        width: 15%;
+        text-align: center;
+        padding: 5px 0;
+    }.head a:nth-child(3){
+         display: inline-block;
+         width: 15%;
+         text-align: center;
+         padding: 5px 0;
+     }
+    .head a:nth-child(2){
+        display: inline-block;
+        text-align: center;
+        padding: 5px 0;
+        font-size:18px;
+    }
+    .book-container{
+        padding: 15px 10px;
+        background: #f2f2f2;
+        border-bottom:1px solid #dfdfdf;
+    }
+    .book-img{
+        float: left;
+        font-size:0 ;
+    }
+    .book-img img{
+        width:74px;
+        height: 98px;
+        margin-right: 10px;
+    }
+    .book-info{
+        overflow: hidden;
+        height: 98px;
+    }
+    .book-info i{
+        display: block;
+    }
+    .book-button{
+
+    }
+    .book-name{
+        font-size:16px;
+    }
+    .info-list{
+        font-size: 14px;
+        color:#787878;
+        margin: 3px 0;
+    }
+    .info-list span{
+        color:#333;
+
+    }
+    .book-button{
+        padding: 10px 0;
+    }
+    .book-button a{
+        display: block;
+        text-align:center;
+        padding: 5px 0;
+        border-radius:3px;
+    }
+    .book-button a:nth-child(1){
+        background:#b33836;
+        color:#fff;
+    }
+    .book-button a:nth-child(2){
+        border:1px solid #b33836;
+        margin-left: 10px;
+        color:#b33836;
+    }
+    .time{
+        display: inline-block;
+        float: right;
+    }
+    .new{
+        font-size: 14px;
+    }
+    .new em{
+        color:#ff4643;
+        border:1px solid #ff4643;
+
+    }
+    .new span {
+        padding: 0 10px;
+    }
+    .book-intro{
+        padding: 15px 10px;
+    }
+    .book-intro h3{
+        padding:  0 0 10px 0;
+        font-size: 16px;
+    }
+    .book-text{
+        font-size: 13px;
+        color: #5d5d5d;
+    }
+    .book-list a{
+        display: block;
+        border-top:1px solid #dfdfdf;
+        padding: 10px;
+        color:#5d5d5d;
+    }
+    .sub-title{
+        padding: 10px;
+        border-top:1px solid #dfdfdf;
+        background: #f2f2f2;
+    }
+    .sub-title h3{
+
+        font-size: 16px;
+
+    }
+    .book-text em{
+        display: none;
+    }
+    .book-text br{
+        display: none;
+    }
+</style>
 <body>
+<div class="head flex">
+    <a > < 返回</a>
+    <a class="flex-fluid">书本详情</a>
+    <a>目录</a>
+</div>
+<div class="book">
+    <div class="book-container">
+        <div class="book-img">
+            <img src="<%= title[0]._doc.imgUrl%>" alt="">
+        </div>
+        <div class="book-info">
+            <i class="book-name"><%= title[0]._doc.name%></i>
+            <i class="info-list">作者：<span><%= title[0]._doc.author%></span></i>
+            <i class="info-list">分类：<span>独家婚宠</span></i>
+            <i class="info-list">字数：<span>独家婚宠</span></i>
+        </div>
+        <div class="book-button flex">
+            <a href="/read/?bookid=<%= info[0]._doc.bookid%>&id=1" class="flex-fluid">立即阅读</a>
+            <a href="" class="flex-fluid">离线下载</a>
+        </div>
+        <div class="new">
+            <em>最新</em><span><%= info[info.length-1]._doc.title %></span><div class="time">昨天</div>
+        </div>
+    </div>
+</div>
+<div class="book-intro">
+    <h3>作品简介</h3>
+    <div class="book-text">
+        <%- title[0]._doc.info%>
+    </div>
+</div>
+<div class="book-mulu">
+    <div class="sub-title">
+        <h3>作品目录<i>(共有<%= info.length %>章)</i></h3>
+    </div>
+    <div class="book-list">
+        <% for(i=0;i< 5;i++) { %>
+        <a href="/read/?bookid=<%= info[i]._doc.bookid%>&id=<%= info[i]._doc.id%>"><%= info[i]._doc.title%></a>
+        <% } %>
+    </div>
+</div>
+<script>
+    window.onload=function (){
 
-<ul>
-    <% for( i = 0;i < info.length;i++ ) {%>
-    <li><%= info[i]._doc.title %></li>
-    <% } %>
-</ul>
-
+    }
+</script>
 </body>
 </html>

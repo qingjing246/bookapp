@@ -1,8 +1,7 @@
 var page = require('webpage').create();
 var execFile = require("child_process").execFile;
 
-var allUrl = ['http://huayu.baidu.com/book/435979.html','http://huayu.baidu.com/book/650649.html','http://huayu.baidu.com/book/650649.html','http://huayu.baidu.com/book/654833.html',
-'http://huayu.baidu.com/book/636453.html','http://huayu.baidu.com/book/641829.html','http://huayu.baidu.com/book/650786.html','http://huayu.baidu.com/book/644045.html'];
+var allUrl = ['http://huayu.baidu.com/book/644045.html'];
 var headdata = '';
 var bookInfo = '';
 var pageNumber = 0;
@@ -13,12 +12,12 @@ var child;
 
 phantom.outputEncoding = "utf-8";
 console.log(allUrl[m]);
+
 headr(allUrl[m]);
 
 //打开首页
 function headr(url) {
     pageNumber = 0;
-    tt = new Date();
     bookInfo = '';
     headdata = '';
     n = 0;
@@ -38,10 +37,13 @@ function headr(url) {
             bookInfo = [allPage, pageOne, id, title, author, introduce, imgUrl, updateDate];
             return bookInfo;
         });
+
         console.log("---------抬头信息" + JSON.stringify(headdata, undefined, 4));
 
         insert(headdata);
+
         pageN(headdata[0]);
+
         console.log("--------所有章节" + headdata[0])
 
     });
@@ -49,30 +51,46 @@ function headr(url) {
 
 //打开所有章节
 function pageN(url) {
+
     page.open(url, function (status) {
         console.log("-------所有章节打开成功" + status);
+
         pageNumber = page.evaluate(function () {
-            var pageN = document.getElementsByClassName('chapname').length - 1;
+            page = document.getElementsByClassName('chapname').length - 1;
             //var pageN = 10;
-            return pageN;
+            return page;
         });
+
         console.log('--------一共有' + pageNumber + '章--------');
+
         pageInfo(headdata[1]);
+
     })
 }
 
 
 function pageInfo(url) {
     console.log('----------下一章节页' + url);
+
     n++;
 
     page.open(url, function (status) {
         console.log('----------下一章节页打开状态' + status);
 
+		    if( status == "fail" ){
+
+			       console.log("错误结束");
+			       console.log("--------------开始下一本-------------");
+             m ++;
+             console.log(allUrl[m]);
+             headr(allUrl[m]);
+		    }
+
         var b = page.evaluate(function () {
 
             var a = document.getElementsByClassName('book_con')[0].innerHTML;
             return a;
+
         });
 
 
@@ -80,34 +98,43 @@ function pageInfo(url) {
 
             var title = document.getElementsByClassName('tc')[1].getElementsByTagName('h2')[0].innerText;
             return title;
+
         });
+
 
         var container = [n, headdata[2], t, b, url];
 
+	      console.log("---------正在下载第"+(parseInt(m)+1)+"本--------");
         console.log("---------第" + n + "次------------");
+
         insert(container);
 
         var nextPage = page.evaluate(function () {
             var length = document.getElementsByClassName('key')[0].getElementsByTagName('a').length;
             var c = document.getElementsByClassName('key')[0].getElementsByTagName('a')[length - 1].href;
-            return c;
+		        return c;
         });
 
+        openagenext(nextPage);
+    })
+}
 
-        if (n <= pageNumber - 1) {
-
-            console.log(nextPage);
-            pageInfo(nextPage);
-
-        } else {
+function openagenext(nextPage){
+    if (n <= pageNumber - 1) {
+        console.log(nextPage);
+		   // setTimeout(function (){
+            pageInfo(nextPage)
+        //},1000);
+    } else {
             //loadtitle(headdata);
 
-            /*console.log(JSON.stringify(headdata, undefined, 4));*/
             tt = new Date - tt;
             console.log("-----------总共加载时间" + tt * 0.001 + "秒-------------");
-            /*phantom.exit();*/
-            console.log(m);
-            if( m == allUrl.length -1){
+
+            console.log("---------正在下载第"+(parseInt(m)+1)+"本--------");
+            if( m == (allUrl.length -1)){
+		tt = new Date - tt;
+		console.log("-----------总共加载时间" + tt * 0.001 + "秒-------------");
                 phantom.exit(0)
             }else{
                 console.log("--------------开始下一本-------------");
@@ -116,14 +143,11 @@ function pageInfo(url) {
                 headr(allUrl[m]);
             }
         }
-    })
-}
 
+}
 
 //插入数据库
 function insert(info) {
     child = execFile('node', ['main.js', JSON.stringify(info)], null,
-        function (err, stdout, stderr) {
-            //console.log(stdout);
-        });
+        function (err, stdout, stderr) {});
 }

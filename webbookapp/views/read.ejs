@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=nio">
     <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
     <link rel="stylesheet" href="/font-icon/iconfont.css"/>
-    <title>Document</title>
+    <title><%= info[0]._doc.title%></title>
     <style type="text/css">
 
         ul{
@@ -51,10 +51,10 @@
             border-color:#736357;
         }
         .read-content h4{
-            font-size:2.5rem;
+            font-size:2rem;
             line-height: 4rem;
             color:#736357;
-            letter-spacing: 0.5rem;
+
         }
         .read-content p{
             text-indent:3rem;
@@ -83,7 +83,7 @@
         }
         .button-bar{
             width:70%;
-            margin: 0 auto;
+            margin: 20px auto 40px;
         }
         .top-nav{
             position:fixed;
@@ -230,7 +230,7 @@
             }
             .font-size-button{
                 text-align: center;
-                padding: 0.6rem 0;
+                padding: 1rem 0;
                 width: 30%;
                 margin:0 1rem;
             }
@@ -260,18 +260,14 @@
     <div id="fiction_title">
     </div>
     <div id="fiction_container" class="read-content">
-        <h4>节过后没两天</h4><hr>
-        <p>
-            开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说，这京城内外的显贵高族之家，也足有十来年没办过七十寿这样的大喜事了，宁老夫人的七十寿，不光李家当头等荣耀大事来办，京城内外，但凡和李家能沾上一星半点交情的，都郑重备了寿礼，打发要紧的人送到李府，在堂前拣几粒福豆，讨上几串福寿结回去，十月十九正日子那天的请柬，李玉靖和长子李云志商量来掂量去，捻断了不知道多少根胡须才定下来，照理说都请上最好，可李府就那么大点地方，要紧的人家一家不能落下，可又不能露出势利相来，这一番思量，真是费尽了心机。<span class=\"watermark\">^=$!$本书首|发纵^横-中文|网&amp;~*&amp;@</span></p><p>十月十六日起，李府就依着规矩，在府门口和李府后巷口派送寿桃，若有年过五十的老人，再加送一瓶米酒，十个大钱，一直派到十八日晚，三天里派出的寿桃无数。十九日一早，内侍就捧着皇上亲笔写的‘寿’字颁赏下来，紧接着，皇后遣内侍赏了柄金嵌玉如意，李玉靖兴奋的满脸红光，亲自踩着凳子将‘寿’字悬挂到正堂正中，又恭恭敬敬的将那柄金嵌玉如意供在了寿字下面的长几上。<span class=\"watermark\">^=$!$本书首|发纵^横-中文|网&amp;~*&amp;@</span>
-        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
-        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
-        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
-        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
-        开炉节过后没两天，李府上下就开始忙起宁老夫人的七十大寿，都说人活七十古来稀，能给家中老人做七十大寿，搁哪家都是满族的骄傲和喜庆，当今皇上又最重孝道，再说
+             <h4> <%= info[0]._doc.title%> </h4>
+            <hr>
+        <div id="txt-main">
+            <%- info[0]._doc.content%>
+        </div>
 
-    </p>
     </div>
-    <div class="button-bar" style="display:none">
+    <div class="button-bar">
         <ul class="tab">
             <li id="prev_button">上一章</li>
             <li id="next_button">下一章</li>
@@ -324,8 +320,12 @@
     </div>
 </div>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
+<script>
+
+</script>
 <script type="text/javascript">
     (function(){
+
         var Util = (function(){
             var prefix = 'html5_reader_';
             var StorageGetter = function(key){
@@ -361,13 +361,31 @@
         var day = true;
         Dom.read_container.css('font-size',font_size + 'px');
 
+
         //入口函数
         function main (){
             EvenHanlder();
+            ReaderModel();
         }
         //实现和阅读器相关数据交互方法
         function ReaderModel(){
+            $('#prev_button').click(function (){
+                if( '<%- info[0]._doc.id%>'== 1){
+                    alert("没有上一页了");
+                    window.location.href = '?bookid=636453&id=<%- info[0]._doc.id%>';
+                }else{
+                    window.location.href = '?bookid=636453&id='+(<%- info[0]._doc.id%>-1);
+                }
 
+            });
+            $('#next_button').click(function (){
+                if( '<%- info[0]._doc.id%>' ){
+                    window.location.href = '?bookid=636453&id='+(<%- info[0]._doc.id%>+1);
+                }else{
+                    alert("已到最后一页");
+                }
+
+            })
         }
 
         //渲染基本UI结构
@@ -380,7 +398,12 @@
 
             //点击中心区域显示消失上下状态栏
             $('#action_box').click(function(){
-                Dom.top_nav.toggle();
+               // Dom.top_nav.toggle();
+                if( Dom.top_nav.css('display') == 'none'){
+                    Dom.top_nav.show();
+                }else{
+                    Dom.top_nav.hide();
+                }
                 Dom.bottom_nav.toggle();
                 Dom.font_container.hide();
                 $('.icon-ziti1').css('color','#fff');
