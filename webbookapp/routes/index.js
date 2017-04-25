@@ -8,7 +8,7 @@ var db = require('./mongoose.js');
 
 router.get('/', function(req, res, next) {
 
-  db.bookinfo.find({},function (err,all){
+  db.bookinfo.find({},null,{limit:3},function (err,all){
 
     res.render('index', { title: all});
 

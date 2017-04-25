@@ -40,16 +40,17 @@
     }
 </style>
 <body>
-    <div class="subhead">
-        <a href="">< 返回</a>
-        <a href="">目录
-        <span>(共有111章)</span>
-        </a>
-        <a href="">书架</a>
-    </div>
+<div class="subhead">
+    <a href="/bookinfo/?id=<%= booklist[0]._doc.bookid%>">< 返回</a>
+    <a href="">目录
+        <span>(共有<%= booklist.length %>章)</span>
+    </a>
+    <a href="">书架</a>
+</div>
 <div class="booklist">
-    <a href="">asddasdasda</a>
-
+    <% for(i=0;i< 20;i++) { %>
+    <a href="/read/?bookid=<%= booklist[i]._doc.bookid%>&id=<%= booklist[i]._doc.id%>"><%= booklist[i]._doc.title%></a>
+    <% } %>
 </div>
 </body>
 </html>

@@ -14,7 +14,7 @@
         font-style:normal;
     }
     h3{
-        font-weight:600;
+        font-weight:500;
 
     }
     a{
@@ -136,16 +136,24 @@
         font-size: 13px;
         color: #5d5d5d;
     }
+    .book-list{
+        background: #fafafa;
+    }
     .book-list a{
         display: block;
         border-top:1px solid #dfdfdf;
         padding: 10px;
         color:#5d5d5d;
+        font-size: 14px;
     }
     .sub-title{
         padding: 10px;
         border-top:1px solid #dfdfdf;
         background: #f2f2f2;
+        font-size: 14px;
+    }
+    .book-list a:nth-child(5){
+        border-bottom: 1px solid #dfdfdf;
     }
     .sub-title h3{
 
@@ -157,6 +165,32 @@
     }
     .book-text br{
         display: none;
+    }
+    .more{
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+    .more-but{
+        width: 80%;
+        display: inline-block;
+        text-align: center;
+        padding: 2px 5px;
+        border: 1px solid #dfdfdf;
+        border-radius: 3px;
+        margin: 0 auto;
+        font-size: 13px;
+        line-height: 36px;
+        color: #4c4c4c;
+        background: #f2f2f2;
+
+    }
+    .book-mulu{
+        background: #fafafa;
+    }
+    a{
+        text-decoration: none;
+        color:#333;
     }
 </style>
 <body>
@@ -181,7 +215,7 @@
             <a href="" class="flex-fluid">离线下载</a>
         </div>
         <div class="new">
-            <em>最新</em><span><%= info[info.length-1]._doc.title %></span><div class="time">昨天</div>
+            <em>最新</em><a href="/read/?bookid=<%= info[info.length-1]._doc.bookid%>&id=<%= info[info.length-1]._doc.id%>"><span><%= info[info.length-1]._doc.title %></span><div class="time">昨天</div></a>
         </div>
     </div>
 </div>
@@ -200,7 +234,11 @@
         <a href="/read/?bookid=<%= info[i]._doc.bookid%>&id=<%= info[i]._doc.id%>"><%= info[i]._doc.title%></a>
         <% } %>
     </div>
+    <div class="more">
+        <a href="/booklist/?bookid=<%= info[i]._doc.bookid%>" class="more-but">进入作品目录 查看更多</a>
+    </div>
 </div>
+
 <script>
     window.onload=function (){
 
