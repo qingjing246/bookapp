@@ -1,10 +1,10 @@
 # 移动端的小说网站
-***
+
 
 其包含了从数据获取，数据库设计，服务器搭建，后台模板渲染的前后端开发流程。
 
 ## 依赖
-***
+
 
 * mongodb
 
@@ -17,7 +17,7 @@
 * phantomjs 
 
 ## 安装
-***
+
 
 * git clone git@github.com:qingjing246/m-book-web.git
 
