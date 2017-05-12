@@ -19,7 +19,7 @@
 ## 安装
 
 
-* git clone git@github.com:qingjing246/m-book-web.git
+* `git clone git@github.com:qingjing246/m-book-web.git`
 
 * 下载 [phantomjs](http://phantomjs.org/)设置为环境变量
 * 下载安装 [mongodb](www.mongodb.org/) 
