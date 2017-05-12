@@ -1,10 +1,24 @@
+
 {
+  "name": "m-book-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/bin/www"
+  },
   "devDependencies": {
     "phantomjs": "^2.1.7+deprecated"
   },
   "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
     "express": "^4.15.2",
+    "mongoose": "^4.9.5",
+    "morgan": "~1.8.1",
+    "serve-favicon": "^2.4.2",
     "express-generator": "^4.15.0",
-    "mongoose": "^4.9.5"
+    "supervisor": "^0.12.0"
   }
 }
