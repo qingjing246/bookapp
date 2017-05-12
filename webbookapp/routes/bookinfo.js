@@ -8,19 +8,21 @@ var a ;
 var b ;
 
 
+
 router.get('/', function (req, res, next) {
 
     var bookid = req.query.id;
     db.bookcontent.find({ "bookid" : bookid },null,{sort:{"id":1}},function (err, all) {
        a = all;
+        db.bookinfo.find({ "id" : bookid },null,{limit:1},function (err, all) {
+            b = all;
+            console.log(a[a.length-1]);
+            res.render('bookinfo', { info: a,title:b})
+        });
 
     });
-    db.bookinfo.find({ "id" : bookid },null,{limit:1},function (err, all) {
-        b = all;
 
-    });
-    console.log(a[a.length-1]);
-    res.render('bookinfo', { info: a,title:b})
+
 });
 
 

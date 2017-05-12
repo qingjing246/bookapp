@@ -1,3 +1,4 @@
+
 var Mongoclient = require('mongodb').MongoClient;
 var DB_url = 'mongodb://localhost:27017/book';
 
@@ -38,6 +39,7 @@ var insertData = function (db, callback) {
 
 Mongoclient.connect(DB_url, function (err, db) {
     console.log('连接成功');
+    console.log('err');
     insertData(db, function (result) {
         db.close();
     })

@@ -1,7 +1,10 @@
 var page = require('webpage').create();
 var execFile = require("child_process").execFile;
 
-var allUrl = ['http://huayu.baidu.com/book/644045.html'];
+var allUrl = ['http://huayu.baidu.com/book/580188.html',
+'http://huayu.baidu.com/book/636941.html',
+'http://huayu.baidu.com/book/646348.html',
+'http://huayu.baidu.com/book/602538.html'];
 var headdata = '';
 var bookInfo = '';
 var pageNumber = 0;
@@ -10,7 +13,7 @@ var m = 0;
 var tt = new Date();
 var child;
 
-phantom.outputEncoding = "utf-8";
+phantom.outputEncoding = "GBK";
 console.log(allUrl[m]);
 
 headr(allUrl[m]);
@@ -149,5 +152,9 @@ function openagenext(nextPage){
 //插入数据库
 function insert(info) {
     child = execFile('node', ['main.js', JSON.stringify(info)], null,
-        function (err, stdout, stderr) {});
+        function (err, stdout, stderr) {
+        if(err){
+            console.log(err)
+        }
+        });
 }

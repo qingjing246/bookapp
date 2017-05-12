@@ -23,6 +23,7 @@
     a {
         text-decoration: none;
         font-style: normal;
+		color:#6d6d6d;
     }
 
     .clearfix:after, .clearfix:before {
@@ -49,7 +50,9 @@
         -ms-flex: 1;
         flex: 1;
     }
-
+    .card-con{
+        cursor: pointer;
+    }
     header {
         width: 100%;
         border-bottom: 1px solid #e6e6e6;
@@ -58,7 +61,8 @@
 
     .nav {
         width: 100%;
-
+		 background: #333;
+      
     }
 
     .nav a {
@@ -71,18 +75,20 @@
         line-height: 40px;
     }
 
-    .nav .action {
+    .action {
         background: #454545;
         color: #f2f2f2;
+		
     }
 
     img {
         width: 100%;
+        box-sizing: border-box;
     }
 
     .slide a {
         float: left;
-
+		width:100%;
     }
 
     .slide a:nth-child(1) {
@@ -193,7 +199,7 @@
     }
 
     .item-author {
-
+		color:#6d6d6d;
     }
 
     .item-label {
@@ -208,24 +214,29 @@
         color: #fff;
         padding: 0 3px;
     }
-    .card-book-info{
-        width: 33.333%;
-        padding: 20px;
-    }
+	.card-con a{
+		display: block;
+		 width: 33.333%;
+		  padding: 10px;
+	}
+    
     .card-book-info i{
-        font-size: 14px;
+        font-size: 12px;
         display: block;
         text-align: center;
+		padding:5px 0;
     }
     .car-book-img {
         border: 1px solid #e6e6e6;
         padding: 1px;
     }
+	hr{
+	width:100%;
+	}
 </style>
 <header>
     <div class="nav clearfix">
-        <a href="">首页</a><a href="">首页</a><a href="">首页</a>
-        <a href="">首页</a>
+        <a href="/">首页</a>
     </div>
     <div class="slide clearfix">
         <a href=""><img src="http://static.zongheng.com/upload/recommend/current/2017/1492654367677.jpg" alt=""/></a>
@@ -233,8 +244,8 @@
         <a href=""><img src="http://static.zongheng.com/upload/recommend/current/2017/1492654422527.jpg" alt=""/></a>
     </div>
     <div class="flex">
-        <a href="">免费专区</a>
-        <a href="">女生精选</a>
+        <a href="/mianfei">免费专区</a>
+        <a href="/nvsheng">女生精选</a>
     </div>
 </header>
 <div class="container">
@@ -242,7 +253,7 @@
         <div class="card-title">
             <i>编辑推荐</i>
         </div>
-        <div class="card-con">
+        <div class="card-con card-but">
             <% for(i=0;i<title.length;i++) {%>
             <div class="home-book-item" data-bookid="<%= title[i]._doc.id %>" data-url="/bookinfo?id=<%= title[i]._doc.id %>">
                 <div class="home-book-img">
@@ -265,71 +276,142 @@
     </div>
     <div class="card boy">
         <div class="card-title">
-            <i>男生必读</i>
+            <i>古代言情</i><hr>
         </div>
         <div class="card-con fle">
+			<a href="/bookinfo?id=662859">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2017/04/1493221273289.jpg" alt="天干物燥起诉帝少"/>
+                <i>天干物燥起诉帝少</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=660680">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/24/26/242691087746f94ebcd0669f231921c4.jpeg" alt="木木和一些关于爱的故事"/>
+                <i>木木和一些关于爱的故事</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=666763">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/75/fd/75fdeb8d33b67976f4ecb3ddd6ca4703.jpeg" alt="煜说"/>
+                <i>煜说</i>
             </div>
+            </a>
         </div>
         <div class="card-con fle">
+			<a href="/bookinfo?id=660807">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2017/05/1493807888154.jpg" alt="惑世权后"/>
+                <i>惑世权后</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=622305">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/12/bc/12bc47ef5f6381e314336c5ca114d9b7.jpeg" alt="女帝之医手遮天"/>
+                <i>女帝之医手遮天</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=665218">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/a0/a2/a0a2bd46673ed3dd750e29d71870944b.jpeg" alt="星辰图志"/>
+                <i>星辰图志</i>
             </div>
+            </a>
         </div>
     </div>
     <div class="card girl">
+	
         <div class="card-title">
-            <i>女生必读</i>
+            <i>都市言情</i><hr>
         </div>
-        <div class="card-con fle">
+         <div class="card-con fle">
+			<a href="/bookinfo?id=657829">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/cf/06/cf06ecedc2f80374be2a904bf57aecea.jpeg" alt="家有仙铺"/>
+                <i>家有仙铺</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=660129">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/fa/23/fa2391f9873da6e64d641d4bb06934a7.jpeg" alt="末世行尸一家亲"/>
+                <i>末世行尸一家亲</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=646644">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/32/4c/324ce7149ccf88057b8be482d90d4c11.jpeg" alt="一剪莲华渡水月"/>
+                <i>一剪莲华渡水月</i>
             </div>
+            </a>
         </div>
-        <div class="card-con fle">
+		<div class="card-con fle">
+			<a href="/bookinfo?id=664483">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/d4/d1/d4d1b45bb00d27d726288a71fb4f6430.jpeg" alt="殉葬妖妃"/>
+                <i>殉葬妖妃</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=662859">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2017/04/1493221273289.jpg" alt="天干物燥起诉帝少"/>
+                <i>天干物燥起诉帝少</i>
             </div>
+            </a>
+			<a href="/bookinfo?id=638740">
             <div class="card-book-info flex-fluid">
-                <img class="car-book-img" src="http://static.zongheng.com/upload/s_image/cover/2014/11/1416425191645.jpg" alt=""/>
-                <i>逆天邪神</i>
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/00/cf/00cf7bac112757c16a67f1a666baebdd.jpeg" alt="影子恋人"/>
+                <i>影子恋人</i>
             </div>
+            </a>
         </div>
     </div>
-</div>
+	<div class="card girl">
+	
+        <div class="card-title">
+            <i>幻想时空</i><hr>
+        </div>
+         <div class="card-con fle">
+			<a href="/bookinfo?id=622611">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2016/11/1478677799315.jpg" alt="山山来了"/>
+                <i>山山来了</i>
+            </div>
+            </a>
+			<a href="/bookinfo?id=637846">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/fa/23/fa2391f9873da6e64d641d4bb06934a7.jpeg" alt="萌师难做：恶徒休得嚣张"/>
+                <i>萌师难做：恶徒休得嚣张</i>
+            </div>
+            </a>
+			<a href="/bookinfo?id=652288">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/32/4c/324ce7149ccf88057b8be482d90d4c11.jpeg" alt="莫灵"/>
+                <i>莫灵</i>
+            </div>
+            </a>
+        </div>
+		<div class="card-con fle">
+			<a href="/bookinfo?id=580188">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/82/f4/82f4f14b65e17e21e1f7a1d2f5877326.jpeg" alt="妖女轻狂：夫君请上马"/>
+                <i>妖女轻狂：夫君请上马</i>
+            </div>
+            </a>
+			<a href="/bookinfo?id=622305">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/12/bc/12bc47ef5f6381e314336c5ca114d9b7.jpeg" alt="女帝之医手遮天"/>
+                <i>女帝之医手遮天</i>
+            </div>
+            </a>
+			<a href="/bookinfo?id=658144">
+            <div class="card-book-info flex-fluid">
+                <img class="car-book-img" src="http://static.zongheng.com/upload/cover/06/de/06dead35e5881ab06edcdd2d39fc637d.jpeg" alt="蔓草寒烟锁六朝"/>
+                <i>蔓草寒烟锁六朝</i>
+            </div>
+            </a>
+        </div>
+    </div>
+	</div>
 <body>
 
 <script>
@@ -358,10 +440,8 @@
 
         function openurl(element){
             var a = document.getElementsByClassName(element);
-
             for (var i = 0; i < a.length; i++) {
                 a[i].onclick = function (){
-                    this.style.background = '#e6e6e6';
                     window.location.href = this.getAttribute('data-url');
                 }
             }

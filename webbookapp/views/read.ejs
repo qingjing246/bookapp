@@ -248,9 +248,17 @@
                 margin-left: 10px;
             }
         }
+        .addition{
+            display: none;
+        }
+        #none{
+            display: none;
+        }
     </style>
 </head>
 <body>
+<i id="none" class="iconfont icon-ziti1">
+</i>
 <div id="root" class="container">
     <div class="action-box" id="action_box">
 
@@ -326,10 +334,9 @@
       </span></div>
     </div>
 </div>
-<script type="text/javascript" src="/js/zepto.min.js"></script>
-<script>
 
-</script>
+<script type="text/javascript" src="/js/zepto.min.js"></script>
+
 <script type="text/javascript">
     (function(){
 
@@ -379,15 +386,16 @@
             $('#prev_button').click(function (){
                 if( '<%- info[0]._doc.id%>'== 1){
                     alert("没有上一页了");
-                    window.location.href = '?bookid=636453&id=<%- info[0]._doc.id%>';
+
                 }else{
-                    window.location.href = '?bookid=636453&id='+(<%- info[0]._doc.id%>-1);
+                    window.location.href = '?bookid=<%- info[0]._doc.bookid%>&id='+(<%- info[0]._doc.id%>-1);
                 }
 
             });
             $('#next_button').click(function (){
                 if( '<%- info[0]._doc.id%>' ){
-                    window.location.href = '?bookid=636453&id='+(<%- info[0]._doc.id%>+1);
+                    console.log(<%- info[0]._doc.id%>);
+                    window.location.href = '?bookid=<%- info[0]._doc.bookid%>&id='+(<%- info[0]._doc.id%>+1);
                 }else{
                     alert("已到最后一页");
                 }

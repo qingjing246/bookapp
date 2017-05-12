@@ -10,6 +10,9 @@ var users = require('./routes/users');
 var bookinfo = require('./routes/bookinfo');
 var read = require('./routes/read');
 var booklist = require('./routes/booklist');
+var mianfei = require('./routes/mianfei');
+var nvsheng = require('./routes/nvsheng');
+var download = require('./routes/download');
 var app = express();
 
 
@@ -34,6 +37,10 @@ app.use('/users', users);
 app.use('/bookinfo', bookinfo);
 app.use('/read', read);
 app.use('/booklist',booklist);
+app.use('/mianfei',mianfei);
+app.use('/nvsheng',nvsheng);
+app.use('/download',download);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

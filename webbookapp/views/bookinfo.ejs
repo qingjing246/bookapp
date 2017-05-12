@@ -35,25 +35,24 @@
         -ms-flex: 1;
         flex: 1;
     }
-    .head{
+    .head a{
         background:#333;
         color:#fff;
+        line-height: 40px;
     }
     .head a:nth-child(1){
         display: inline-block;
         width: 15%;
         text-align: center;
-        padding: 5px 0;
     }.head a:nth-child(3){
          display: inline-block;
          width: 15%;
          text-align: center;
-         padding: 5px 0;
+
      }
     .head a:nth-child(2){
         display: inline-block;
         text-align: center;
-        padding: 5px 0;
         font-size:18px;
     }
     .book-container{
@@ -135,6 +134,12 @@
     .book-text{
         font-size: 13px;
         color: #5d5d5d;
+        height: 60px;
+        overflow: hidden; /*自动隐藏文字*/
+        text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+        display: -webkit-box;
+        -webkit-line-clamp:4;
+        -webkit-box-orient: vertical;
     }
     .book-list{
         background: #fafafa;
@@ -194,10 +199,11 @@
     }
 </style>
 <body>
+
 <div class="head flex">
-    <a > < 返回</a>
+    <a href="/" > < 返回</a>
     <a class="flex-fluid">书本详情</a>
-    <a>目录</a>
+    <a href="/booklist/?bookid=<%= info[i]._doc.bookid%>">目录</a>
 </div>
 <div class="book">
     <div class="book-container">
@@ -212,7 +218,7 @@
         </div>
         <div class="book-button flex">
             <a href="/read/?bookid=<%= info[0]._doc.bookid%>&id=1" class="flex-fluid">立即阅读</a>
-            <a href="" class="flex-fluid">离线下载</a>
+            <a href="/download?id=<%= info[0]._doc.bookid%>" class="flex-fluid">离线下载</a>
         </div>
         <div class="new">
             <em>最新</em><a href="/read/?bookid=<%= info[info.length-1]._doc.bookid%>&id=<%= info[info.length-1]._doc.id%>"><span><%= info[info.length-1]._doc.title %></span><div class="time">昨天</div></a>
