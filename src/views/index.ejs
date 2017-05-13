@@ -24,6 +24,9 @@
         text-decoration: none;
         font-style: normal;
 		color:#6d6d6d;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select:none;
     }
 
     .clearfix:after, .clearfix:before {
@@ -53,6 +56,7 @@
     .card-con{
         cursor: pointer;
     }
+
     header {
         width: 100%;
         border-bottom: 1px solid #e6e6e6;
@@ -219,7 +223,11 @@
 		 width: 33.333%;
 		  padding: 10px;
 	}
-    
+    .b_list a{
+        display: block;
+        width: 33.333%;
+        padding: 10px;
+    }
     .card-book-info i{
         font-size: 12px;
         display: block;
@@ -278,7 +286,7 @@
         <div class="card-title">
             <i>古代言情</i><hr>
         </div>
-        <div class="card-con fle">
+        <div class="b_list fle">
 			<a href="/bookinfo?id=662859">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2017/04/1493221273289.jpg" alt="天干物燥起诉帝少"/>
@@ -298,7 +306,7 @@
             </div>
             </a>
         </div>
-        <div class="card-con fle">
+        <div class="b_list fle">
 			<a href="/bookinfo?id=660807">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2017/05/1493807888154.jpg" alt="惑世权后"/>
@@ -324,7 +332,7 @@
         <div class="card-title">
             <i>都市言情</i><hr>
         </div>
-         <div class="card-con fle">
+         <div class="b_list fle">
 			<a href="/bookinfo?id=657829">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/cf/06/cf06ecedc2f80374be2a904bf57aecea.jpeg" alt="家有仙铺"/>
@@ -344,7 +352,7 @@
             </div>
             </a>
         </div>
-		<div class="card-con fle">
+		<div class="b_list fle">
 			<a href="/bookinfo?id=664483">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/d4/d1/d4d1b45bb00d27d726288a71fb4f6430.jpeg" alt="殉葬妖妃"/>
@@ -370,7 +378,7 @@
         <div class="card-title">
             <i>幻想时空</i><hr>
         </div>
-         <div class="card-con fle">
+         <div class="b_list fle">
 			<a href="/bookinfo?id=622611">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/2016/11/1478677799315.jpg" alt="山山来了"/>
@@ -390,7 +398,7 @@
             </div>
             </a>
         </div>
-		<div class="card-con fle">
+		<div class="b_list fle">
 			<a href="/bookinfo?id=580188">
             <div class="card-book-info flex-fluid">
                 <img class="car-book-img" src="http://static.zongheng.com/upload/cover/82/f4/82f4f14b65e17e21e1f7a1d2f5877326.jpeg" alt="妖女轻狂：夫君请上马"/>
@@ -412,6 +420,7 @@
         </div>
     </div>
 	</div>
+
 <body>
 
 <script>
@@ -441,7 +450,7 @@
         function openurl(element){
             var a = document.getElementsByClassName(element);
             for (var i = 0; i < a.length; i++) {
-                a[i].onclick = function (){
+                a[i].onclick = function (e){
                     window.location.href = this.getAttribute('data-url');
                 }
             }
@@ -456,7 +465,7 @@
                     for (var i = 0; i < navA.length; i++) {
                         navA[i].className = '';
                     }
-                    this.className = "action";
+                    navA[this.index].className = "action";
                     return false;
                 }
             }

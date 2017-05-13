@@ -38,14 +38,36 @@
         white-space: nowrap;
         overflow: hidden;
     }
+    .fle {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .flex-fluid {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .shujia{
+        text-align: right;
+        padding: 0 10px 0 0;
+    }
+    .perv{
+        padding: 0 0 0 10px;
+    }
 </style>
 <body>
-<div class="subhead">
-    <a href="/bookinfo/?id=<%= booklist[0]._doc.bookid%>">< 返回</a>
-    <a href="">目录
+<div class="subhead fle">
+    <a class="perv flex-fluid" href="/bookinfo/?id=<%= booklist[0]._doc.bookid%>">< 返回</a>
+    <a >目录
         <span>(共有<%= booklist.length %>章)</span>
     </a>
-    <a href="">书架</a>
+    <a class="shujia flex-fluid" >书架</a>
 </div>
 <div class="booklist">
     <% for(i=0;i< 20;i++) { %>

@@ -16,7 +16,6 @@ router.get('/', function (req, res, next) {
        a = all;
         db.bookinfo.find({ "id" : bookid },null,{limit:1},function (err, all) {
             b = all;
-            console.log(a[a.length-1]);
             res.render('bookinfo', { info: a,title:b})
         });
 
